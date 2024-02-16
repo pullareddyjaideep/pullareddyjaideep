@@ -1,0 +1,33 @@
+import random
+import re
+
+def get_response(user_input):
+    responses = {
+        r'\bhello\b|\bhi\b': ['Hello!', 'Hi there!', 'Greetings!'],
+        r'\bhow are you\b': ['I am doing well, thank you!', 'I'm just a computer program, but I'm functioning properly.'],
+        r'\bbye\b|\bgoodbye\b': ['Goodbye!', 'See you later!', 'Farewell!'],
+        r'\bname\b': ["I'm a chatbot.", "You can call me ChatGPT."],
+       
+    }
+
+    for pattern, response_list in responses.items():
+        if re.search(pattern, user_input, re.IGNORECASE):
+            return random.choice(response_list)
+
+    return "I'm sorry, I don't understand that."
+
+def main():
+    print("Chatbot: Hello! Type 'bye' to exit.")
+    
+    while True:
+        user_input = input("You: ")
+        
+        if user_input.lower() == 'bye':
+            print("Chatbot: Goodbye!")
+            break
+        
+        response = get_response(user_input)
+        print("Chatbot:", response)
+
+if __name__ == "__main__":
+    main()
